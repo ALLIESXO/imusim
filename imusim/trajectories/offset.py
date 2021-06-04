@@ -58,17 +58,17 @@ class OffsetTrajectory(PositionTrajectory, RotationTrajectory):
     @CacheLastValue()
     def position(self, t):
         p = self.parent.position(t)
-        r = self.parent.rotation(t)
-        return p + r.rotateVector(self.positionOffset)
+        #r = self.parent.rotation(t)
+        return p 
 
     @CacheLastValue()
     def velocity(self, t):
         v = self.parent.velocity(t)
-        r = self.parent.rotation(t)
-        o = r.rotateVector(self.positionOffset)
-        omega = self.parent.rotationalVelocity(t)
-        rv = vectors.cross(omega, o)
-        return v + rv
+        #r = self.parent.rotation(t)
+        #o = r.rotateVector(self.positionOffset)
+        #omega = self.parent.rotationalVelocity(t)
+        #rv = vectors.cross(omega, o)
+        return v
 
     @CacheLastValue()
     @prepend_method_doc(PositionTrajectory)
@@ -80,18 +80,18 @@ class OffsetTrajectory(PositionTrajectory, RotationTrajectory):
         velocity and acceleration
         """
         a = self.parent.acceleration(t)
-        r = self.parent.rotation(t)
-        o = r.rotateVector(self.positionOffset)
-        omega = self.parent.rotationalVelocity(t)
-        alpha = self.parent.rotationalAcceleration(t)
-        lt = vectors.cross(alpha, o)
-        lr = vectors.dot(o, omega) * omega - o * vectors.norm(omega)**2
-        return a + lt + lr
+        #r = self.parent.rotation(t)
+        #o = r.rotateVector(self.positionOffset)
+        #omega = self.parent.rotationalVelocity(t)
+        #alpha = self.parent.rotationalAcceleration(t)
+        #lt = vectors.cross(alpha, o)
+        #lr = vectors.dot(o, omega) * omega - o * vectors.norm(omega)**2
+        return a 
 
     @CacheLastValue()
     def rotation(self, t):
-        return self.parent.rotation(t) * self.rotationOffset
-
+        return self.parent.rotation(t)
+        
     def rotationalVelocity(self, t):
         return self.parent.rotationalVelocity(t)
 

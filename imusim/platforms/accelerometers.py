@@ -33,7 +33,7 @@ class Accelerometer(Sensor):
         g = gravity(self.trajectory.position(t), t)
         l = self.trajectory.acceleration(t)
         a = l - g
-        return self.trajectory.rotation(t).rotateFrame(a)
+        return a
 
 class IdealAccelerometer(Accelerometer, IdealSensor):
     """
